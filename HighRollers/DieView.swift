@@ -7,22 +7,12 @@
 
 import SwiftUI
 
-//extension HorizontalAlignment {
-//    private enum DieCorner: AlignmentID {
-//        static func defaultValue(in context: ViewDimensions) -> CGFloat {
-//            context[HorizontalAlignment.center]
-//        }
-//    }
-//    
-//    static let dieCorner = HorizontalAlignment(DieCorner.self)
-//}
-
 struct DieView: View {
-    let numSides: Int
-    let value: Int?
+    let die: Die
+//    let timer = Timer.publish(every: 0.33, on: .main, in: .common)
     
     var displayValue: String {
-        if let value {
+        if let value = die.value {
             return String(value)
         } else {
             return "?"
@@ -30,7 +20,7 @@ struct DieView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .trailing) {
             ZStack {
                 RoundedRectangle(cornerRadius: 4)
                     .frame(width: 80, height: 80)
@@ -45,13 +35,14 @@ struct DieView: View {
                     .bold()
             }
             
-//            Text("D-\(numSides)")
-//                .font(.callout)
+            Text("D-\(die.type.rawValue)")
+                .font(.callout)
 //                .offset(x: 40) // half the width of the die
         }
+        .padding(.vertical, 20)
     }
 }
 
 #Preview {
-    DieView(numSides: 6, value: nil)
+    DieView(die: Die(type: .six))
 }

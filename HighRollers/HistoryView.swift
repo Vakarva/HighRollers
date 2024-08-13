@@ -63,9 +63,6 @@ struct HistoryView: View {
                 .defaultScrollAnchor(.trailing)
                 .scrollClipDisabled(true)
             }
-
-            
-            Divider()
         }
         .background(Color(hue: 0.333, saturation: 0.72, brightness: 0.383))
     }

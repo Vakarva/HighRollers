@@ -9,48 +9,47 @@ import CoreHaptics
 import SwiftUI
 
 struct ContentView: View {
-    @State private var rollValue: Int?
-    @State private var rolls = [Roll]()
-    @State private var dice = [Die(type: .six), Die(type: .four), Die(type: .hundred)]
-    
-    let numSides = 6
+    @State private var totalRollValue = 0
+    @State private var rolls = [Roll].loadData()
+    @State private var dice = [Die(type: .six)]
+    @State private var showingAddDialog = false
     
     let columns = [
-        GridItem(.adaptive(minimum: 100)),
-        GridItem(.adaptive(minimum: 100)),
         GridItem(.adaptive(minimum: 100))
     ]
     
     var body: some View {
         VStack {
             HistoryView(rolls: rolls)
+                .contextMenu {
+                    Button("Clear History", role: .destructive) {
+                        [Roll].clearHistory()
+                        withAnimation {
+                            rolls = [Roll]()
+                        }
+                    }
+                }
             
             Spacer()
-            LazyVGrid(columns: columns) {
-                ForEach(dice) { die in
-                    DieView(numSides: die.type.rawValue, value: rollValue)
-                        .contextMenu {
-                            Button("Delete", role: .destructive) {
-                                
+            
+            ScrollView(.vertical) {
+                LazyVGrid(columns: columns) {
+                    ForEach(Array(dice.enumerated()), id: \.element.id) { index, die in
+                        DieView(die: die)
+                            .contextMenu {
+                                Button("Delete", role: .destructive) {
+                                    removeDie(at: index)
+                                }
                             }
-                        }
+                    }
                 }
             }
             
-//            Button("Roll Dice") {
-//                
-//            }
-//            .font(.title2)
-//            .padding(8)
-//            .background(Color(hue: 1.0, saturation: 0.006, brightness: 0.226))
-//            .foregroundStyle(.white)
-//            .clipShape(.buttonBorder)
-            
-            
             Spacer()
+            
             HStack {
                 Button {
-                    // does something
+                    showingAddDialog = true
                 } label: {
                     Image(systemName: "plus")
                         .padding()
@@ -63,14 +62,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Button {
-                    rollValue = Int.random(in: 1...numSides)
-                    if let rollValue {
-                        withAnimation {
-                            rolls.append(Roll(total: rollValue))
-                        }
-                    }
-                } label: {
+                Button(action: rollDice) {
                     Image(systemName: "dice")
                         .padding()
                         .background(Color(hue: 1.0, saturation: 0.006, brightness: 0.226))
@@ -79,9 +71,42 @@ struct ContentView: View {
                         .foregroundStyle(.white)
                 }
                 .padding()
-                .sensoryFeedback(.success, trigger: rollValue)
+                .sensoryFeedback(.success, trigger: totalRollValue)
             }
         }
+        .confirmationDialog("Add a die", isPresented: $showingAddDialog) {
+            ForEach(DieType.allCases) { dieType in
+                Button {
+                    addDie(dieType: dieType)
+                } label: {
+                    Text("\(dieType.rawValue)-sided")
+                }
+            }
+        }
+    }
+    
+    func addDie(dieType: DieType) {
+        let die = Die(type: dieType)
+        dice.append(die)
+    }
+    
+    func removeDie(at index: Int) {
+        dice.remove(at: index)
+    }
+    
+    func rollDice() {
+        totalRollValue = 0
+        
+        for index in dice.indices {
+            dice[index].roll()
+            totalRollValue += dice[index].value ?? 0
+        }
+        
+        let roll = Roll(total: totalRollValue)
+        withAnimation {
+            rolls.append(roll)
+        }
+        rolls.saveData()
     }
 }
 
