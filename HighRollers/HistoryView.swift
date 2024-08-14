@@ -46,8 +46,8 @@ struct HistoryView: View {
                 .padding(.horizontal, 10)
             
             HStack {
-                ScrollView(.horizontal) {
-                    HStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
                         ForEach(rolls) { roll in
                             TotalView(total: roll.total)
                                 .visualEffect { content, proxy in
@@ -59,6 +59,7 @@ struct HistoryView: View {
                         }
                     }
                 }
+                .frame(height: 100)
                 .padding(.trailing, 10)
                 .defaultScrollAnchor(.trailing)
                 .scrollClipDisabled(true)

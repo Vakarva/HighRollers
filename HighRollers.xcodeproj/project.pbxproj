@@ -63,13 +63,13 @@
 			children = (
 				273852E02C6ADACC0060B9A5 /* HighRollersApp.swift */,
 				273852E22C6ADACC0060B9A5 /* ContentView.swift */,
-				273852F62C6C0DA40060B9A5 /* AddDieView.swift */,
 				273852EE2C6B1D600060B9A5 /* DieView.swift */,
 				273852F42C6BFC2E0060B9A5 /* Die.swift */,
 				273852F22C6BD8020060B9A5 /* HistoryView.swift */,
 				273852F02C6B27ED0060B9A5 /* Roll.swift */,
 				273852E42C6ADACE0060B9A5 /* Assets.xcassets */,
 				273852E62C6ADACE0060B9A5 /* Preview Content */,
+				273852F82C6C20C40060B9A5 /* Deprecated */,
 			);
 			path = HighRollers;
 			sourceTree = "<group>";
@@ -80,6 +80,14 @@
 				273852E72C6ADACE0060B9A5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		273852F82C6C20C40060B9A5 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				273852F62C6C0DA40060B9A5 /* AddDieView.swift */,
+			);
+			path = Deprecated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

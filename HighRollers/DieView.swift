@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DieView: View {
     let die: Die
-//    let timer = Timer.publish(every: 0.33, on: .main, in: .common)
     
     var displayValue: String {
         if let value = die.value {
@@ -39,7 +38,7 @@ struct DieView: View {
                 .font(.callout)
 //                .offset(x: 40) // half the width of the die
         }
-        .padding(.vertical, 20)
+        .padding()
     }
 }
 

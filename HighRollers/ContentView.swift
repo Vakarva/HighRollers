@@ -29,6 +29,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .padding(.bottom, 20)
             
             Spacer()
             
@@ -62,7 +63,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Button(action: rollDice) {
+                Button(action: shakeDice) {
                     Image(systemName: "dice")
                         .padding()
                         .background(Color(hue: 1.0, saturation: 0.006, brightness: 0.226))
@@ -94,19 +95,41 @@ struct ContentView: View {
         dice.remove(at: index)
     }
     
-    func rollDice() {
-        totalRollValue = 0
-        
+    func rollLoop() {
         for index in dice.indices {
             dice[index].roll()
             totalRollValue += dice[index].value ?? 0
         }
+    }
+    
+    func shakeDice() {
+        var runCount = 0
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            withAnimation {
+                rollLoop()
+            }
+            runCount += 1
+            
+            if runCount > 5 {
+                timer.invalidate()
+                rollDice()
+            }
+        }
+    }
         
+    func rollDice() {
+        // get the end values for all dice
+        totalRollValue = 0
+        withAnimation {
+            rollLoop()
+        }
+        
+        // update history with the total value of the dice
         let roll = Roll(total: totalRollValue)
         withAnimation {
             rolls.append(roll)
         }
-        rolls.saveData()
+        rolls.saveData()    // save to disk
     }
 }
 
