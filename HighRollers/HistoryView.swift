@@ -30,6 +30,7 @@ struct TotalView: View {
                 .frame(width: 63, height: 63)
             
             Text(total, format: .number)
+                .foregroundStyle(.black)
                 .font(.title)
         }
     }

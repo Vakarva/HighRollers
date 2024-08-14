@@ -30,6 +30,7 @@ struct DieView: View {
                     )
                 
                 Text(displayValue)
+                    .foregroundStyle(.black)
                     .font(.largeTitle)
                     .bold()
             }
