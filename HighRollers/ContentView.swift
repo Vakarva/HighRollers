@@ -96,6 +96,7 @@ struct ContentView: View {
     }
     
     func rollLoop() {
+        totalRollValue = 0
         for index in dice.indices {
             dice[index].roll()
             totalRollValue += dice[index].value ?? 0
@@ -119,7 +120,6 @@ struct ContentView: View {
         
     func rollDice() {
         // get the end values for all dice
-        totalRollValue = 0
         withAnimation {
             rollLoop()
         }
