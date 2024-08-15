@@ -33,13 +33,28 @@ struct TestingArea: View {
                         }
                 }
             }
-//            .toolbar {
-//                Button("Kill One") {
-//                    withAnimation(.bouncy) {
-//                        drawings.removeAll()
-//                    }
-//                }
-//            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(role: .destructive) {
+                        withAnimation(.bouncy) {
+                            drawings.removeAll()
+                        }
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        withAnimation(.bouncy) {
+                            drawings.append(Drawing(name: "circle"))
+                        }
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+                
+            }
         }
     }
 }

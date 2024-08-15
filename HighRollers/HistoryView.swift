@@ -37,6 +37,8 @@ struct TotalView: View {
     }
 }
 
+
+// Idea from https://stackoverflow.com/questions/63873033/swiftui-fade-out-a-scrollview
 extension View {
     func fadeOutLeading(isOn: Bool) -> some View {
         return self.mask(
