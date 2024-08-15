@@ -20,6 +20,7 @@ struct TotalView: View {
                 )
                 .frame(width: 70, height: 70)
                 .padding(.vertical, 1)
+                .shadow(radius: 5)
             
             Circle()
                 .foregroundStyle(.white)

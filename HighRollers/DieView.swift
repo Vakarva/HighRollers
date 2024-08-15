@@ -28,6 +28,7 @@ struct DieView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .stroke(.black)
                     )
+                    .shadow(radius: 5)
                 
                 Text(displayValue)
                     .foregroundStyle(.black)
