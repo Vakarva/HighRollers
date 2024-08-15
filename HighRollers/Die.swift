@@ -14,8 +14,12 @@ enum DieType: Int, CaseIterable, Identifiable {
 
 struct Die: Equatable, Identifiable {
     var id = UUID()
-    let type: DieType
+    var type: DieType
     var value: Int?
+    
+    mutating func edit(type: DieType) {
+        self.type = type
+    }
     
     mutating func roll() {
         let numSides = type.rawValue

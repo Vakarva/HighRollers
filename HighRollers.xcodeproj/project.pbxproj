@@ -17,6 +17,9 @@
 		273852F52C6BFC2E0060B9A5 /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273852F42C6BFC2E0060B9A5 /* Die.swift */; };
 		273852F72C6C0DA40060B9A5 /* AddDieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273852F62C6C0DA40060B9A5 /* AddDieView.swift */; };
 		273852FA2C6DC1C90060B9A5 /* TestingArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273852F92C6DC1C90060B9A5 /* TestingArea.swift */; };
+		273852FC2C6DE6B40060B9A5 /* ScrollViewTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273852FB2C6DE6B40060B9A5 /* ScrollViewTesting.swift */; };
+		273852FE2C6E6A8E0060B9A5 /* MoreScrollViewTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273852FD2C6E6A8E0060B9A5 /* MoreScrollViewTesting.swift */; };
+		2738531A2C6E841D0060B9A5 /* SelectDieType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273853192C6E841D0060B9A5 /* SelectDieType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		273852F42C6BFC2E0060B9A5 /* Die.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
 		273852F62C6C0DA40060B9A5 /* AddDieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDieView.swift; sourceTree = "<group>"; };
 		273852F92C6DC1C90060B9A5 /* TestingArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingArea.swift; sourceTree = "<group>"; };
+		273852FB2C6DE6B40060B9A5 /* ScrollViewTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewTesting.swift; sourceTree = "<group>"; };
+		273852FD2C6E6A8E0060B9A5 /* MoreScrollViewTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreScrollViewTesting.swift; sourceTree = "<group>"; };
+		273853192C6E841D0060B9A5 /* SelectDieType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDieType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +94,10 @@
 			isa = PBXGroup;
 			children = (
 				273852F62C6C0DA40060B9A5 /* AddDieView.swift */,
+				273853192C6E841D0060B9A5 /* SelectDieType.swift */,
 				273852F92C6DC1C90060B9A5 /* TestingArea.swift */,
+				273852FB2C6DE6B40060B9A5 /* ScrollViewTesting.swift */,
+				273852FD2C6E6A8E0060B9A5 /* MoreScrollViewTesting.swift */,
 			);
 			path = Deprecated;
 			sourceTree = "<group>";
@@ -168,9 +177,12 @@
 				273852F32C6BD8020060B9A5 /* HistoryView.swift in Sources */,
 				273852FA2C6DC1C90060B9A5 /* TestingArea.swift in Sources */,
 				273852F12C6B27ED0060B9A5 /* Roll.swift in Sources */,
+				273852FE2C6E6A8E0060B9A5 /* MoreScrollViewTesting.swift in Sources */,
+				273852FC2C6DE6B40060B9A5 /* ScrollViewTesting.swift in Sources */,
 				273852F72C6C0DA40060B9A5 /* AddDieView.swift in Sources */,
 				273852F52C6BFC2E0060B9A5 /* Die.swift in Sources */,
 				273852EF2C6B1D600060B9A5 /* DieView.swift in Sources */,
+				2738531A2C6E841D0060B9A5 /* SelectDieType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

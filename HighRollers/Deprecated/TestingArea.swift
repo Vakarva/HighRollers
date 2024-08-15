@@ -14,29 +14,37 @@ struct Drawing: Equatable, Identifiable {
 
 struct TestingArea: View {
     @State private var isOn = false
-    @State private var drawings = [Drawing(name: "circle"), Drawing(name: "square")]
+    @State private var drawings = [Drawing]()
     
     var body: some View {
         NavigationStack {
-            VStack {
-                ForEach(Array(drawings.enumerated()), id: \.element.id) { index, drawing in
-                    Circle()
-                        .transition(.asymmetric(insertion: .push(from: .bottom), removal: .scale))
-                        .contextMenu {
-                            Button("Kill Me", role: .destructive) {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                                    withAnimation(.bouncy) {
-                                        _ = drawings.remove(at: index)
+            ScrollView(.horizontal) {
+                LazyHStack {
+                    ForEach(Array(drawings.enumerated()), id: \.element.id) { index, drawing in
+                        Circle()
+                            .frame(width: 100)
+                            .transition(.asymmetric(insertion: .push(from: .trailing), removal: .scale))
+//                            .transition(.push(from: .trailing))
+                            .contextMenu {
+                                Button("Kill Me", role: .destructive) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                                        withAnimation(.bouncy) {
+                                            _ = drawings.remove(at: index)
+                                        }
                                     }
                                 }
                             }
-                        }
+                    }
                 }
+                .scrollTargetLayout()
             }
+            .scrollClipDisabled()
+            .scrollTargetBehavior(.viewAligned)
+//            .defaultScrollAnchor(UnitPoint.trailing)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(role: .destructive) {
-                        withAnimation(.bouncy) {
+                        withAnimation(.spring) {
                             drawings.removeAll()
                         }
                     } label: {

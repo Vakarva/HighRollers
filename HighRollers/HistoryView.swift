@@ -60,30 +60,31 @@ struct HistoryView: View {
     let rolls: [Roll]
     
     var body: some View {
+        let hSpacing = 8.0
+        let scaleAmount = 1.25
+        
         VStack {
             Text("History:")
                 .font(.headline)
                 .foregroundStyle(.white)
                 .padding(.horizontal, 10)
             
-            HStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack {
-                        ForEach(rolls) { roll in
-                            TotalView(total: roll.total)
-                                .scaleEffect(roll.id == rolls.last?.id ? 1.25 : 1)
-                                .padding(roll.id == rolls.last?.id ? 10 : 0)
-                                .transition(.push(from: .trailing))
-                        }
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: hSpacing) {
+                    ForEach(rolls) { roll in
+                        TotalView(total: roll.total)
+                            .scaleEffect(roll.id == rolls.last?.id ? scaleAmount : 1)
+                            .offset(x: roll.id == rolls.last?.id ? hSpacing * scaleAmount : 0)
+                            .transition(.push(from: .trailing))
                     }
                 }
-                .frame(height: 110)
-                .padding(.trailing, 10)
-                .defaultScrollAnchor(.trailing)
-                .scrollClipDisabled(true)
-                .fadeOutLeading(isOn: rolls.count > 2)
-                .contentMargins(.leading, 10, for: .scrollContent)
             }
+            .frame(height: 110)
+            .safeAreaPadding(.leading, 5)
+            .safeAreaPadding(.trailing, 30)
+            .scrollClipDisabled(true)
+            .fadeOutLeading(isOn: rolls.count > 2)
+            .defaultScrollAnchor(.trailing)
         }
         .background(Color(hue: 0.333, saturation: 0.72, brightness: 0.383))
     }

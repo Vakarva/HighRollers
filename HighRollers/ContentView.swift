@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var rolls = [Roll].loadData()
     @State private var dice = [Die(type: .six)]
     @State private var showingAddDialog = false
+    @State private var showingEditDialog = false
+    @State private var selectedDieIndex: Int?
     
     let columns = [
         GridItem(.adaptive(minimum: 100))
@@ -37,6 +39,17 @@ struct ContentView: View {
                     ForEach(Array(dice.enumerated()), id: \.element.id) { index, die in
                         DieView(die: die)
                             .contextMenu {
+                                Button {
+                                    selectedDieIndex = index
+                                    showingEditDialog = true
+                                } label: {
+                                    HStack {
+                                        Text("Edit Type")
+                                        Spacer()
+                                        Image(systemName: "pencil")
+                                    }
+                                }
+                                
                                 Button(role: .destructive) {
                                     removeDie(at: index)
                                 } label: {
@@ -89,6 +102,17 @@ struct ContentView: View {
                 } label: {
                     Text("\(dieType.rawValue)-sided")
                 }
+            }
+        }
+        .confirmationDialog("Edit die type", isPresented: $showingEditDialog, titleVisibility: .visible) {
+            ForEach(DieType.allCases) { dieType in
+                Button {
+                    dice[selectedDieIndex!].edit(type: dieType)
+                    selectedDieIndex = nil
+                } label: {
+                    Text("\(dieType.rawValue)-sided")
+                }
+                Divider()
             }
         }
     }
