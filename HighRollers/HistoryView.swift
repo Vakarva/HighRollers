@@ -51,6 +51,7 @@ struct HistoryView: View {
                     LazyHStack {
                         ForEach(rolls) { roll in
                             TotalView(total: roll.total)
+                                .transition(.push(from: .trailing))
                                 .visualEffect { content, proxy in
                                     content
                                         .opacity(proxy.frame(in: .global).midX / 150 + 0.2)

@@ -39,9 +39,12 @@ struct ContentView: View {
                         DieView(die: die)
                             .contextMenu {
                                 Button("Delete", role: .destructive) {
-                                    removeDie(at: index)
+                                    withAnimation(.bouncy) {
+                                        removeDie(at: index)
+                                    }
                                 }
                             }
+                            .transition(.asymmetric(insertion: .push(from: .trailing), removal: .identity))
                     }
                 }
             }
@@ -69,13 +72,14 @@ struct ContentView: View {
                         .background(Color(hue: 1.0, saturation: 0.006, brightness: 0.226))
                         .clipShape(.circle)
                         .font(.largeTitle)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(dice.isEmpty ? .red : .white)
                 }
                 .padding()
                 .sensoryFeedback(.success, trigger: totalRollValue)
+                .disabled(dice.isEmpty)
             }
         }
-        .confirmationDialog("Add a die", isPresented: $showingAddDialog) {
+        .confirmationDialog("Add a die", isPresented: $showingAddDialog, titleVisibility: .visible) {
             ForEach(DieType.allCases) { dieType in
                 Button {
                     addDie(dieType: dieType)
@@ -88,7 +92,9 @@ struct ContentView: View {
     
     func addDie(dieType: DieType) {
         let die = Die(type: dieType)
-        dice.append(die)
+        withAnimation(.bouncy) {
+            dice.append(die)
+        }
     }
     
     func removeDie(at index: Int) {
@@ -126,7 +132,7 @@ struct ContentView: View {
         
         // update history with the total value of the dice
         let roll = Roll(total: totalRollValue)
-        withAnimation {
+        withAnimation(.bouncy) {
             rolls.append(roll)
         }
         rolls.saveData()    // save to disk
