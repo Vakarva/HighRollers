@@ -42,10 +42,21 @@ struct SelectDie: View {
     let die: Die
     
     var body: some View {
-        if die.type == .four {
+        switch die.type {
+        case .four:
             D4()
-        } else {
+        case .six:
             D6()
+        case .eight:
+            D8()
+        case .ten:
+            D10()
+        case .twelve:
+            D12()
+        case .twenty:
+            D20()
+        case .hundred:
+            D100()
         }
     }
 }
@@ -79,6 +90,61 @@ struct D6: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 4)
             .foregroundStyle(Color(hue: 1.0, saturation: 0, brightness: 0.9))
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(.black)
+            )
+    }
+}
+
+struct D8: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 4)
+            .foregroundStyle(Color(hue: 0.782, saturation: 0.437, brightness: 0.969))
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(.black)
+            )
+    }
+}
+
+struct D10: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 4)
+            .foregroundStyle(Color(hue: 0.156, saturation: 0.622, brightness: 0.935))
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(.black)
+            )
+    }
+}
+
+struct D12: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 4)
+            .foregroundStyle(Color(hue: 0.522, saturation: 0.524, brightness: 0.981))
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(.black)
+            )
+    }
+}
+
+struct D20: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 4)
+            .foregroundStyle(Color(hue: 0.083, saturation: 0.685, brightness: 1.0))
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(.black)
+            )
+    }
+}
+
+struct D100: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 4)
+            .foregroundStyle(Color(hue: 0.31, saturation: 0.735, brightness: 0.917))
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(.black)
