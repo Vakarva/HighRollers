@@ -12,7 +12,7 @@ enum DieType: Int, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-struct Die: Identifiable {
+struct Die: Equatable, Identifiable {
     var id = UUID()
     let type: DieType
     var value: Int?

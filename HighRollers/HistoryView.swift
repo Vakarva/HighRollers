@@ -36,6 +36,23 @@ struct TotalView: View {
     }
 }
 
+extension View {
+    func fadeOutLeading(isOn: Bool) -> some View {
+        return self.mask(
+            HStack(spacing: 0) {
+                LinearGradient(gradient:
+                    Gradient(colors: [Color.black.opacity(isOn ? 0 : 1), Color.black]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .frame(width: 150)
+            
+                Rectangle().fill(Color.black)
+            }
+        )
+    }
+}
+
 struct HistoryView: View {
     let rolls: [Roll]
     
@@ -51,20 +68,18 @@ struct HistoryView: View {
                     LazyHStack {
                         ForEach(rolls) { roll in
                             TotalView(total: roll.total)
-                                .transition(.push(from: .trailing))
-                                .visualEffect { content, proxy in
-                                    content
-                                        .opacity(proxy.frame(in: .global).midX / 150 + 0.2)
-                                }
                                 .scaleEffect(roll.id == rolls.last?.id ? 1.25 : 1)
                                 .padding(roll.id == rolls.last?.id ? 10 : 0)
+                                .transition(.push(from: .trailing))
                         }
                     }
                 }
-                .frame(height: 100)
+                .frame(height: 110)
                 .padding(.trailing, 10)
                 .defaultScrollAnchor(.trailing)
                 .scrollClipDisabled(true)
+                .fadeOutLeading(isOn: rolls.count > 2)
+                .contentMargins(.leading, 10, for: .scrollContent)
             }
         }
         .background(Color(hue: 0.333, saturation: 0.72, brightness: 0.383))

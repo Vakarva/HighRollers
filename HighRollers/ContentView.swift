@@ -22,11 +22,10 @@ struct ContentView: View {
         VStack {
             HistoryView(rolls: rolls)
                 .contextMenu {
-                    Button("Clear History", role: .destructive) {
-                        [Roll].clearHistory()
-                        withAnimation {
-                            rolls = [Roll]()
-                        }
+                    Button(role: .destructive, action: clearHistory) {
+                        Text("Clear History")
+                        Spacer()
+                        Image(systemName: "trash")
                     }
                 }
                 .padding(.bottom, 20)
@@ -38,13 +37,17 @@ struct ContentView: View {
                     ForEach(Array(dice.enumerated()), id: \.element.id) { index, die in
                         DieView(die: die)
                             .contextMenu {
-                                Button("Delete", role: .destructive) {
-                                    withAnimation(.bouncy) {
-                                        removeDie(at: index)
+                                Button(role: .destructive) {
+                                    removeDie(at: index)
+                                } label: {
+                                    HStack {
+                                        Text("Delete")
+                                        Spacer()
+                                        Image(systemName: "trash")
                                     }
-                                }
                             }
-                            .transition(.asymmetric(insertion: .push(from: .trailing), removal: .identity))
+                        }
+                        .transition(.asymmetric(insertion: .push(from: .trailing), removal: .scale))
                     }
                 }
             }
@@ -97,8 +100,26 @@ struct ContentView: View {
         }
     }
     
+    func clearHistory() {
+        // Clears history on the disk
+        [Roll].clearHistory()
+        
+        // Clears history on app screen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                rolls = [Roll]()
+            }
+        }
+    }
+    
     func removeDie(at index: Int) {
-        dice.remove(at: index)
+        // Have to wait a second before deleting for animation to work properly
+        // ... is a bug with SwiftUI https://stackoverflow.com/questions/60358948/swiftui-delete-row-in-list-with-context-menu-ui-glitch
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            withAnimation {
+                let _ = dice.remove(at: index)
+            }
+        }
     }
     
     func rollLoop() {
