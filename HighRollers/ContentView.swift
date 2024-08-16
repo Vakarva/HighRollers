@@ -129,7 +129,7 @@ struct ContentView: View {
         [Roll].clearHistory()
         
         // Clears history on app screen
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             withAnimation {
                 rolls = [Roll]()
             }
@@ -139,7 +139,7 @@ struct ContentView: View {
     func removeDie(at index: Int) {
         // Have to wait a second before deleting for animation to work properly
         // ... is a bug with SwiftUI https://stackoverflow.com/questions/60358948/swiftui-delete-row-in-list-with-context-menu-ui-glitch
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             withAnimation {
                 let _ = dice.remove(at: index)
             }
