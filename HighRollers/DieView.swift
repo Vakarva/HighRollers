@@ -61,21 +61,21 @@ struct SelectDie: View {
     }
 }
 
-struct Triangle: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let heightScale = rect.maxX * Double(3).squareRoot() / 2.0
-        
-        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.minX, y: heightScale))
-        path.addLine(to: CGPoint(x: rect.maxX, y: heightScale))
-        path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
-
-        return path
-    }
-}
-
 struct D4: View {
+    struct Triangle: Shape {
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            let heightScale = rect.maxX * Double(3).squareRoot() / 2.0
+            
+            path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.minX, y: heightScale))
+            path.addLine(to: CGPoint(x: rect.maxX, y: heightScale))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+
+            return path
+        }
+    }
+    
     var body: some View {
         Triangle()
             .foregroundStyle(Color(hue: 1.0, saturation: 0.419, brightness: 0.951))
@@ -153,5 +153,5 @@ struct D100: View {
 }
 
 #Preview {
-    DieView(die: Die(type: .six))
+    DieView(die: Die(type: .four))
 }
