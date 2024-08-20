@@ -58,6 +58,7 @@ extension View {
 
 struct HistoryView: View {
     let rolls: [Roll]
+    let clearHistory: () -> Void
     
     var body: some View {
         let hSpacing = 8.0
@@ -85,11 +86,18 @@ struct HistoryView: View {
             .scrollClipDisabled(true)
             .fadeOutLeading(isOn: rolls.count > 2)
             .defaultScrollAnchor(.trailing)
+            .contextMenu {
+                Button(role: .destructive, action: clearHistory) {
+                    Text("Clear History")
+                    Spacer()
+                    Image(systemName: "trash")
+                }
+            }
         }
         .background(Color(hue: 0.333, saturation: 0.72, brightness: 0.383))
     }
 }
 
 #Preview {
-    HistoryView(rolls: [Roll(total: 994), Roll(total: 2), Roll(total: 6), Roll(total: 1)])
+    HistoryView(rolls: [Roll(total: 994), Roll(total: 2), Roll(total: 6), Roll(total: 1)], clearHistory: { })
 }

@@ -22,14 +22,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            HistoryView(rolls: rolls)
-                .contextMenu {
-                    Button(role: .destructive, action: clearHistory) {
-                        Text("Clear History")
-                        Spacer()
-                        Image(systemName: "trash")
-                    }
-                }
+            HistoryView(rolls: rolls, clearHistory: clearHistory)
                 .padding(.bottom, 20)
             
             Spacer()

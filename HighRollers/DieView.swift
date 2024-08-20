@@ -63,24 +63,31 @@ struct SelectDie: View {
 
 struct D4: View {
     struct Triangle: Shape {
+        var radius: Double
+        
         func path(in rect: CGRect) -> Path {
-            var path = Path()
             let heightScale = rect.maxX * Double(3).squareRoot() / 2.0
             
-            path.move(to: CGPoint(x: rect.midX, y: rect.minY))
-            path.addLine(to: CGPoint(x: rect.minX, y: heightScale))
-            path.addLine(to: CGPoint(x: rect.maxX, y: heightScale))
-            path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+            let point1 = CGPoint(x: 0, y: heightScale)
+            let point2 = CGPoint(x: rect.midX, y: 0)
+            let point3 = CGPoint(x: rect.maxX, y: heightScale)
+
+            var path = Path()
+            path.move(to: CGPoint(x: rect.midX, y: heightScale))
+            path.addArc(tangent1End: point1, tangent2End: point2, radius: radius)
+            path.addArc(tangent1End: point2, tangent2End: point3, radius: radius)
+            path.addArc(tangent1End: point3, tangent2End: point1, radius: radius)
+            path.addLine(to: CGPoint(x: rect.midX, y: heightScale))
 
             return path
         }
     }
     
     var body: some View {
-        Triangle()
+        Triangle(radius: 4)
             .foregroundStyle(Color(hue: 1.0, saturation: 0.419, brightness: 0.951))
             .overlay(
-                Triangle()
+                Triangle(radius: 4)
                     .stroke(.black)
             )
     }
