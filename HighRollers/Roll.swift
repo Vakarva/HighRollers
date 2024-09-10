@@ -2,7 +2,7 @@
 //  Roll.swift
 //  HighRollers
 //
-//  Created by Vahe Vartan on 8/12/24.
+//  Created by Varkva on 8/12/24.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  TestingArea.swift
 //  HighRollers
 //
-//  Created by Vahe Vartan on 8/14/24.
+//  Created by Vakarva on 8/14/24.
 //
 
 import SwiftUI

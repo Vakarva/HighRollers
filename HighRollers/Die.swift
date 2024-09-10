@@ -2,7 +2,7 @@
 //  Dice.swift
 //  HighRollers
 //
-//  Created by Vahe Vartan on 8/13/24.
+//  Created by Vakarva on 8/13/24.
 //
 
 import Foundation

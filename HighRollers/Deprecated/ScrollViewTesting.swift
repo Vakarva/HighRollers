@@ -2,7 +2,7 @@
 //  ScrollViewTesting.swift
 //  HighRollers
 //
-//  Created by Vahe Vartan on 8/15/24.
+//  Created by Vakarva on 8/15/24.
 //
 
 import SwiftUI

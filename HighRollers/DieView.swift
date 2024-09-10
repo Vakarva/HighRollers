@@ -2,7 +2,7 @@
 //  Die.swift
 //  HighRollers
 //
-//  Created by Vahe Vartan on 8/12/24.
+//  Created by Vakarva on 8/12/24.
 //
 
 import SwiftUI
